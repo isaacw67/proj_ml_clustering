@@ -1,0 +1,165 @@
+
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['geochart'],
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      let colors = []
+      // Some functions I made for an old project
+      function getRandomColor() {
+        // We can just generate a random hex number
+        do {
+          ret = '#';
+          for (i = 0; i < 3; i++) {
+            ret += Math.ceil(Math.random()*256).toString(16);
+            if (ret.length % 2 === 0) {
+              ret += "f"
+            }
+          }
+        } while (colorDistance(ret) <= 1);
+        return ret;
+      }
+
+      function hexStrToNum(color) {
+        let colorArr = [];
+        let val = '';
+        for (i = 1; i < 7; i+=2) {
+          val = '';
+          val += color.charAt(i);
+          val += color.charAt(i+1);
+          colorArr.push(Number(val));
+        }
+        return colorArr;
+      }
+
+      function colorDistance(color) {
+        // Color is in hex, so we convert
+        let minDist = Infinity;
+        let dist = 0;
+        let colorArr = hexStrToNum(color);
+
+        // Now we need to go through all colors and check distance
+        let compColor = [];
+        for (j = 2; j < (colors.length - 1); j+= 1) {
+          compColor = hexStrToNum(colors[j]);
+          dist = Math.sqrt((colorArr[0] - compColor[0]) ^ 2 + (colorArr[1] - compColor[1]) ^ 2 + (colorArr[1] - compColor[1]) ^ 2);
+          if (minDist > dist) {
+            minDist = dist;
+          }
+        }
+        return minDist;
+
+        
+      }
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+            ['Country', 'Cluster'],
+            ['China',0],
+            ['Ecuador',0],
+            ['Ethiopia',0],
+            ['Hong Kong',0],
+            ['India',0],
+            ['Indonesia',0],
+            ['Iran',0],
+            ['Jamaica',0],
+            ['Kenya',0],
+            ['Malaysia',0],
+            ['Philippines',0],
+            ['Sierra Leone',0],
+            ['Singapore',0],
+            ['Tanzania',0],
+            ['Vietnam',0],
+            ['Zambia',0],
+            ['Australia',1],
+            ['Austria',1],
+            ['Canada',1],
+            ['Germany',1],
+            ['Ireland',1],
+            ['New Zealand',1],
+            ['South Africa',1],
+            ['Switzerland',1],
+            ['United Kingdom',1],
+            ['United States',1],
+            ['Chile',2],
+            ['Costa Rica',2],
+            ['Greece',2],
+            ['Guatemala',2],
+            ['Peru',2],
+            ['Portugal',2],
+            ['Slovenia',2],
+            ['South Korea',2],
+            ['Taiwan',2],
+            ['Thailand',2],
+            ['Turkey',2],
+            ['Uruguay',2],
+            ['Estonia',3],
+            ['Israel',3],
+            ['Latvia',3],
+            ['Lithuania',3],
+            ['Colombia',4],
+            ['El Salvador',4],
+            ['Ghana',4],
+            ['Mexico',4],
+            ['Nigeria',4],
+            ['Trinidad and Tobago',4],
+            ['Venezuela',4],
+            ['Brazil',5],
+            ['Kuwait',5],
+            ['Lebanon',5],
+            ['Libya',5],
+            ['Panama',5],
+            ['Saudi Arabia',5],
+            ['Suriname',5],
+            ['United Arab Emirates',5],
+            ['Bangladesh',6],
+            ['Bulgaria',6],
+            ['Croatia',6],
+            ['Egypt',6],
+            ['Iraq',6],
+            ['Morocco',6],
+            ['Pakistan',6],
+            ['Romania',6],
+            ['Russia',6],
+            ['Serbia',6],
+            ['Denmark',7],
+            ['Finland',7],
+            ['Netherlands',7],
+            ['Norway',7],
+            ['Sweden',7],
+            ['Argentina',8],
+            ['Belgium',8],
+            ['Czech Republic',8],
+            ['France',8],
+            ['Hungary',8],
+            ['Italy',8],
+            ['Japan',8],
+            ['Malta',8],
+            ['Poland',8],
+            ['Spain',8],
+            ['Slovak Rep',9]
+        ]);
+
+        
+        for (let i = 0; i <= 9; i++) {
+          colors.push(getRandomColor())
+        }
+        var options = {
+            // Pick colors, I actually have some code I think I can use here
+            // ...
+            colorAxis:{colors:colors}
+        };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="regions_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
