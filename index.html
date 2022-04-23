@@ -16,11 +16,14 @@
           ret = '#';
           for (i = 0; i < 3; i++) {
             ret += Math.ceil(Math.random()*256).toString(16);
-            if (ret.length % 2 === 0) {
-              ret += "f"
-            }
           }
-        } while (colorDistance(ret) <= 1);
+          while (ret.length < 7) {
+            ret += "f" // If theres trouble somehow, just add an f
+          }
+        } while (colorDistance(ret) <= 5);
+        if (ret.length > 7) {
+          return getRandomColor()
+        }
         return ret;
       }
 
@@ -28,7 +31,7 @@
         let colorArr = [];
         let val = '';
         for (i = 1; i < 7; i+=2) {
-          val = '';
+          val = '0x'; // Tell Number that its hex
           val += color.charAt(i);
           val += color.charAt(i+1);
           colorArr.push(Number(val));
@@ -41,106 +44,107 @@
         let minDist = Infinity;
         let dist = 0;
         let colorArr = hexStrToNum(color);
-
         // Now we need to go through all colors and check distance
         let compColor = [];
-        for (j = 2; j < (colors.length - 1); j+= 1) {
+        for (j = 0; j < (colors.length); j += 1) {
           compColor = hexStrToNum(colors[j]);
           dist = Math.sqrt((colorArr[0] - compColor[0]) ^ 2 + (colorArr[1] - compColor[1]) ^ 2 + (colorArr[1] - compColor[1]) ^ 2);
           if (minDist > dist) {
             minDist = dist;
           }
         }
+        console.log(minDist)
         return minDist;
 
         
       }
       function drawRegionsMap() {
+        // Wasn't quite sure how to do this one. 
         var data = google.visualization.arrayToDataTable([
-            ['Country', 'Cluster'],
-            ['China',0],
-            ['Ecuador',0],
-            ['Ethiopia',0],
-            ['Hong Kong',0],
-            ['India',0],
-            ['Indonesia',0],
-            ['Iran',0],
-            ['Jamaica',0],
-            ['Kenya',0],
-            ['Malaysia',0],
-            ['Philippines',0],
-            ['Sierra Leone',0],
-            ['Singapore',0],
-            ['Tanzania',0],
-            ['Vietnam',0],
-            ['Zambia',0],
-            ['Australia',1],
-            ['Austria',1],
-            ['Canada',1],
-            ['Germany',1],
-            ['Ireland',1],
-            ['New Zealand',1],
-            ['South Africa',1],
-            ['Switzerland',1],
-            ['United Kingdom',1],
-            ['United States',1],
-            ['Chile',2],
-            ['Costa Rica',2],
-            ['Greece',2],
-            ['Guatemala',2],
-            ['Peru',2],
-            ['Portugal',2],
-            ['Slovenia',2],
-            ['South Korea',2],
-            ['Taiwan',2],
-            ['Thailand',2],
-            ['Turkey',2],
-            ['Uruguay',2],
-            ['Estonia',3],
-            ['Israel',3],
-            ['Latvia',3],
-            ['Lithuania',3],
-            ['Colombia',4],
-            ['El Salvador',4],
-            ['Ghana',4],
-            ['Mexico',4],
-            ['Nigeria',4],
-            ['Trinidad and Tobago',4],
-            ['Venezuela',4],
-            ['Brazil',5],
-            ['Kuwait',5],
-            ['Lebanon',5],
-            ['Libya',5],
-            ['Panama',5],
-            ['Saudi Arabia',5],
-            ['Suriname',5],
-            ['United Arab Emirates',5],
-            ['Bangladesh',6],
-            ['Bulgaria',6],
-            ['Croatia',6],
-            ['Egypt',6],
-            ['Iraq',6],
-            ['Morocco',6],
-            ['Pakistan',6],
-            ['Romania',6],
-            ['Russia',6],
-            ['Serbia',6],
-            ['Denmark',7],
-            ['Finland',7],
-            ['Netherlands',7],
-            ['Norway',7],
-            ['Sweden',7],
-            ['Argentina',8],
-            ['Belgium',8],
-            ['Czech Republic',8],
-            ['France',8],
-            ['Hungary',8],
-            ['Italy',8],
-            ['Japan',8],
-            ['Malta',8],
-            ['Poland',8],
-            ['Spain',8],
-            ['Slovak Rep',9]
+        ['Country', 'Cluster'],
+        ['China',0],
+        ['Hong Kong',0],
+        ['India',0],
+        ['Jamaica',0],
+        ['Malaysia',0],
+        ['Philippines',0],
+        ['Singapore',0],
+        ['Slovak Rep',0],
+        ['Vietnam',0],
+        ['Chile',1],
+        ['Costa Rica',1],
+        ['Greece',1],
+        ['Guatemala',1],
+        ['Panama',1],
+        ['Peru',1],
+        ['Portugal',1],
+        ['Slovenia',1],
+        ['South Korea',1],
+        ['Suriname',1],
+        ['Turkey',1],
+        ['Uruguay',1],
+        ['Denmark',2],
+        ['Finland',2],
+        ['Netherlands',2],
+        ['Norway',2],
+        ['Sweden',2],
+        ['Austria',3],
+        ['Germany',3],
+        ['Israel',3],
+        ['South Africa',3],
+        ['Switzerland',3],
+        ['Brazil',4],
+        ['Ecuador',4],
+        ['Ethiopia',4],
+        ['Indonesia',4],
+        ['Iran',4],
+        ['Kenya',4],
+        ['Kuwait',4],
+        ['Lebanon',4],
+        ['Libya',4],
+        ['Saudi Arabia',4],
+        ['Sierra Leone',4],
+        ['Taiwan',4],
+        ['Tanzania',4],
+        ['Thailand',4],
+        ['United Arab Emirates',4],
+        ['Zambia',4],
+        ['Argentina',5],
+        ['Belgium',5],
+        ['Czech Republic',5],
+        ['France',5],
+        ['Hungary',5],
+        ['Italy',5],
+        ['Japan',5],
+        ['Malta',5],
+        ['Poland',5],
+        ['Spain',5],
+        ['Bangladesh',6],
+        ['Bulgaria',6],
+        ['Croatia',6],
+        ['Egypt',6],
+        ['Iraq',6],
+        ['Morocco',6],
+        ['Pakistan',6],
+        ['Romania',6],
+        ['Russia',6],
+        ['Serbia',6],
+        ['Estonia',7],
+        ['Latvia',7],
+        ['Lithuania',7],
+        ['Colombia',8],
+        ['El Salvador',8],
+        ['Ghana',8],
+        ['Mexico',8],
+        ['Nigeria',8],
+        ['Trinidad and Tobago',8],
+        ['Venezuela',8],
+        ['Australia',9],
+        ['Canada',9],
+        ['Ireland',9],
+        ['New Zealand',9],
+        ['United Kingdom',9],
+        ['United States',9]
         ]);
 
         

@@ -1,0 +1,10 @@
+pdi_high, respect father master servant brother younger older wisdom favor protect obey orders pleasing
+pdi_low, rights complain negotiate fairness task necessity codetermination objectives question criticize
+idv_high, self friendship contract litigation self-interest self-respect self-actualizing individual dignity I me pleasure adventure guilt privacy
+idv_low, we harmony face obligation sacrifice family tradition decency honor duty loyalty shame
+mvf_high, career competition fight aggressive success winner deserve merit excel force big fast tough hard quantity total power action
+mvf_low, quality caring solidarity modesty compromise help love grow small soft slow tender touch
+unc_high, structure duty truth law order certain pure clear secure safe predictable tight
+unc_low, maybe creative conflict tolerant experiment spontaneous relativity insight unstructured loose flexible
+ivr_high, leisure happy loose freedom tolerance acceptance soft-punishments
+ivr_low, work tight moral severe-punishments rules strict intolerance
